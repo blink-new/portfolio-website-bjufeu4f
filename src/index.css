@@ -3,104 +3,28 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --color-primary: 266, 100%, 50%;
-    --color-secondary: 190, 100%, 50%;
-    --color-background: 220, 20%, 97%;
-    --color-text: 220, 10%, 20%;
-  }
-
-  .dark {
-    --color-primary: 266, 80%, 60%;
-    --color-secondary: 190, 80%, 60%;
-    --color-background: 220, 20%, 10%;
-    --color-text: 220, 10%, 90%;
-  }
+:root {
+  --background: #0a0a0a;
+  --text: #ffffff;
+  --primary: #3b82f6;
+  --secondary: #8b5cf6;
 }
 
-@layer components {
-  .glow-effect {
-    position: relative;
-  }
-
-  .glow-effect::after {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    background: linear-gradient(
-      45deg,
-      hsl(var(--color-primary)),
-      hsl(var(--color-secondary))
-    );
-    filter: blur(15px);
-    z-index: -1;
-    opacity: 0.5;
-    transition: opacity 0.3s ease;
-  }
-
-  .glow-effect:hover::after {
-    opacity: 1;
-  }
-
-  .gradient-text {
-    background: linear-gradient(
-      45deg,
-      hsl(var(--color-primary)),
-      hsl(var(--color-secondary))
-    );
-    -webkit-background-clip: text;
-    color: transparent;
-  }
-
-  .animated-border {
-    --border-size: 2px;
-    --border-angle: 0turn;
-    background-image: conic-gradient(
-      from var(--border-angle),
-      hsl(var(--color-primary)),
-      hsl(var(--color-secondary)),
-      hsl(var(--color-primary))
-    );
-    background-size: calc(100% + var(--border-size) * 2) calc(100% + var(--border-size) * 2);
-    background-position: center;
-    background-clip: content-box, border-box;
-    animation: bg-spin 3s linear infinite;
-  }
-
-  @keyframes bg-spin {
-    to {
-      --border-angle: 1turn;
-    }
-  }
+body {
+  background-color: var(--background);
+  color: var(--text);
 }
 
-.cursor-glow {
-  position: fixed;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(
-    circle,
-    hsla(var(--color-primary), 0.15),
-    transparent 70%
-  );
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-  transform: translate(-50%, -50%);
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
 }
 
-.grid-background {
-  background-image: linear-gradient(hsla(var(--color-text), 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, hsla(var(--color-text), 0.1) 1px, transparent 1px);
-  background-size: 40px 40px;
+/* Add smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }
 
-.floating {
-  animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
+/* Container styles */
+.container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
 }
